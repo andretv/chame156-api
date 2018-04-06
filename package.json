@@ -1,0 +1,19 @@
+{
+  "name": "chame156-api",
+  "version": "1.0.0",
+  "description": "Chame 156 RESTapi",
+  "main": "serve.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andretv/chame156-api.git"
+  },
+  "author": "Andre Vaccari <andrevaccari95@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andretv/chame156-api/issues"
+  },
+  "homepage": "https://github.com/andretv/chame156-api#readme"
+}
