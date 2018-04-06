@@ -5,8 +5,9 @@
   "main": "serve.js",
   "scripts": {
     "start": "npm run dev",
-    "dev": "NODE_ENV=development node_modules/.bin/nodemon .",
-    "prod": "NODE_ENV=production node ."
+    "dev": "NODE_ENV=development node_modules/.bin/nodemon . --knexfile ./config/knex.js",
+    "prod": "NODE_ENV=production node . --knexfile ./config/knex.js",
+    "knex": "knex --knexfile ./config/knex.js"
   },
   "repository": {
     "type": "git",

@@ -1,10 +1,15 @@
 const express = require('express')
-const dbConnection = require('./dbConnection')
-const createDatabaseTables = require('./createTables')
+const knex = require('../db/knex')
 
 const app = express()
-const db = dbConnection()
-createDatabaseTables(db)
+
+app.get('/', (req, res) => {
+  knex
+    .select('*')
+    .from('usuario')
+    .then(result => res.json(result))
+    .catch(err => console.error(err))
+})
 
 app.use(express.json())
 app.use(express.urlencoded({
