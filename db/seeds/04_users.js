@@ -10,7 +10,8 @@ exports.seed = (knex, Promise) => {
           senha: '123456',
           nome: 'André Trevizan Vaccari',
           email: 'andrevaccari95@gmail.com',
+          cargo_id: 1,
         },
-      ]);
-    });
-};
+      ])
+    })
+}

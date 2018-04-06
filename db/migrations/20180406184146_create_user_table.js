@@ -7,8 +7,11 @@ exports.up = (knex, Promise) => {
     table.string('email', 255).notNull()
     table.integer('pontuacao').notNull().defaultTo(0)
     table.boolean('ativo').notNull().defaultTo(true)
-    table.timestamp('created_at').defaultTo(knex.fn.now());
-    table.timestamp('updated_at').defaultTo(knex.fn.now());
+    table.integer('cargo_id', 11).unsigned().notNull()
+    table.timestamp('created_at').defaultTo(knex.fn.now())
+    table.timestamp('updated_at').defaultTo(knex.fn.now())
+
+    table.foreign('cargo_id').references('id').inTable('cargo')
   })
 }
 
