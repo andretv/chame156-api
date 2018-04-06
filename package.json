@@ -4,7 +4,10 @@
   "description": "Chame 156 RESTapi",
   "main": "serve.js",
   "scripts": {
-    "start": "node ."
+    "start": "npm run dev",
+    "dev": "NODE_ENV=development node_modules/.bin/nodemon . --knexfile ./config/knex.js",
+    "prod": "NODE_ENV=production node . --knexfile ./config/knex.js",
+    "knex": "knex --knexfile ./config/knex.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +18,13 @@
   "bugs": {
     "url": "https://github.com/andretv/chame156-api/issues"
   },
-  "homepage": "https://github.com/andretv/chame156-api#readme"
+  "homepage": "https://github.com/andretv/chame156-api#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "knex": "^0.14.4",
+    "mysql": "^2.15.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.3"
+  }
 }
