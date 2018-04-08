@@ -1,9 +1,9 @@
 module.exports = {
   development: {
-    client: 'mysql',
+    client: 'pg',
     connection: {
-      host: 'mysql',
-      user: 'root',
+      host: 'db',
+      user: 'postgres',
       password: 'chame156',
       database: 'chame156',
     },
@@ -16,10 +16,10 @@ module.exports = {
     },
   },
   production: {
-    client: 'mysql',
+    client: 'pg',
     connection: {
-      host: 'mysql',
-      user: 'root',
+      host: 'db',
+      user: 'postgres',
       password: 'chame156',
       database: 'chame156',
     },
@@ -32,3 +32,37 @@ module.exports = {
     },
   },
 }
+// module.exports = {
+//   development: {
+//     client: 'mysql',
+//     connection: {
+//       host: 'mysql',
+//       user: 'root',
+//       password: 'chame156',
+//       database: 'chame156',
+//     },
+//     migrations: {
+//       tableName: 'migrations',
+//       directory: './../db/migrations',
+//     },
+//     seeds: {
+//       directory: '../db/seeds',
+//     },
+//   },
+//   production: {
+//     client: 'mysql',
+//     connection: {
+//       host: 'mysql',
+//       user: 'root',
+//       password: 'chame156',
+//       database: 'chame156',
+//     },
+//     migrations: {
+//       tableName: 'migrations',
+//       directory: './../db/migrations',
+//     },
+//     seeds: {
+//       directory: '../db/seeds',
+//     },
+//   },
+// }

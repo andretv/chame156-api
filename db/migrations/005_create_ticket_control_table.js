@@ -8,7 +8,11 @@ exports.up = (knex, Promise) => {
     table.timestamp('updated_at').defaultTo(knex.fn.now())
 
     table.foreign('cpf').references('cpf').inTable('usuario')
+      .onDelete('CASCADE')
+      .onUpdate('CASCADE')
     table.foreign('chamado_id').references('id').inTable('chamado')
+      .onDelete('CASCADE')
+      .onUpdate('CASCADE')
   })
 }
 

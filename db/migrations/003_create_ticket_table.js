@@ -11,6 +11,8 @@ exports.up = function (knex, Promise) {
     table.timestamp('updated_at').defaultTo(knex.fn.now())
 
     table.foreign('titulo_id').references('id').inTable('titulo')
+      .onDelete('CASCADE')
+      .onUpdate('CASCADE')
   })
 }
 
