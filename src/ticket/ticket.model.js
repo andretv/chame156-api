@@ -5,6 +5,32 @@ const ticketTable = 'chamado'
 const ticketTitleTable = 'titulo'
 const ticketControlTable = 'chamado_controle'
 
+const query = knex
+  .select([
+    `${ticketControlTable}.cpf`,
+    `${ticketControlTable}.chamado_id`,
+    `${ticketTitleTable}.id`,
+    `${ticketTitleTable}.titulo`,
+    `${userTable}.cpf`,
+    `${userTable}.nome`,
+    `${userTable}.email`,
+    `${userTable}.pontuacao`,
+    `${userTable}.ativo`,
+    `${ticketTable}.id`,
+    `${ticketTable}.titulo_id`,
+    `${ticketTable}.descricao`,
+    `${ticketTable}.verdadeiro`,
+    `${ticketTable}.status_inicial`,
+    `${ticketTable}.status_final`,
+    `${ticketTable}.closed_at`,
+    `${ticketTable}.created_at`,
+    `${ticketTable}.updated_at`,
+  ])
+  .from(ticketControlTable)
+  .innerJoin(userTable, `${ticketControlTable}.cpf`, `${userTable}.cpf`)
+  .innerJoin(ticketTable, `${ticketControlTable}.chamado_id`, `${ticketTable}.id`)
+  .innerJoin(ticketTitleTable, `${ticketTable}.titulo_id`, `${ticketTitleTable}.id`)
+
 const mapTicket = results => results.map(result => ({
   id: result.id,
   titulo: result.titulo,
@@ -36,62 +62,19 @@ const create = async (cpf, data) => {
   return findOne(parseInt(ticket, 10))
 }
 
-const findAll = () => {
-  return knex
-    .select([
-      `${ticketControlTable}.cpf`,
-      `${ticketControlTable}.chamado_id`,
-      `${ticketControlTable}.verdadeiro`,
-      `${ticketTitleTable}.id`,
-      `${ticketTitleTable}.titulo`,
-      `${userTable}.cpf`,
-      `${userTable}.nome`,
-      `${userTable}.email`,
-      `${userTable}.pontuacao`,
-      `${userTable}.ativo`,
-      `${ticketTable}.id`,
-      `${ticketTable}.titulo_id`,
-      `${ticketTable}.descricao`,
-      `${ticketTable}.status_inicial`,
-      `${ticketTable}.status_final`,
-      `${ticketTable}.closed_at`,
-      `${ticketTable}.created_at`,
-      `${ticketTable}.updated_at`,
-    ])
-    .from(ticketControlTable)
-    .innerJoin(userTable, `${ticketControlTable}.cpf`, `${userTable}.cpf`)
-    .innerJoin(ticketTable, `${ticketControlTable}.chamado_id`, `${ticketTable}.id`)
-    .innerJoin(ticketTitleTable, `${ticketTable}.titulo_id`, `${ticketTitleTable}.id`)
+const findAll = (cpf = undefined) => {
+
+  if (cpf) {
+    query.where(`${ticketControlTable}.cpf`, cpf)
+  }
+
+  return query
     .then(results => mapTicket(results))
 }
 
 const findOne = id => {
   if (typeof id !== 'number') throw new Error('Id precisa ser do tipo Number');
-  return knex
-    .select(
-      `${ticketControlTable}.cpf`,
-      `${ticketControlTable}.chamado_id`,
-      `${ticketControlTable}.verdadeiro`,
-      `${ticketTitleTable}.id`,
-      `${ticketTitleTable}.titulo`,
-      `${userTable}.cpf`,
-      `${userTable}.nome`,
-      `${userTable}.email`,
-      `${userTable}.pontuacao`,
-      `${userTable}.ativo`,
-      `${ticketTable}.id`,
-      `${ticketTable}.titulo_id`,
-      `${ticketTable}.descricao`,
-      `${ticketTable}.status_inicial`,
-      `${ticketTable}.status_final`,
-      `${ticketTable}.closed_at`,
-      `${ticketTable}.created_at`,
-      `${ticketTable}.updated_at`,
-  )
-    .from(ticketControlTable)
-    .innerJoin(userTable, `${ticketControlTable}.cpf`, `${userTable}.cpf`)
-    .innerJoin(ticketTable, `${ticketControlTable}.chamado_id`, `${ticketTable}.id`)
-    .innerJoin(ticketTitleTable, `${ticketTable}.titulo_id`, `${ticketTitleTable}.id`)
+  return query
     .where('chamado_id', id)
     .then(result => mapTicket(result))
     .then(result => result[0])

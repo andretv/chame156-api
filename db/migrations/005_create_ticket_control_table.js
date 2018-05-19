@@ -3,7 +3,6 @@ exports.up = (knex, Promise) => {
   return knex.schema.createTable('chamado_controle', table => {
     table.string('cpf', 11).notNull()
     table.integer('chamado_id', 11).unsigned().notNull()
-    table.boolean('verdadeiro').notNull().defaultTo(true)
     table.timestamp('created_at').defaultTo(knex.fn.now())
     table.timestamp('updated_at').defaultTo(knex.fn.now())
 

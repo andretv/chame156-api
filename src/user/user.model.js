@@ -56,6 +56,7 @@ const update = (cpf, updateObj) => {
         .select('*')
         .from(tableName)
         .where('cpf', parseInt(cpf, 10))
+        .then(result => result[0])
         .then(result => lodash.omit(result, ['senha']))
     )
 }

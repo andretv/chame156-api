@@ -9,7 +9,10 @@ app.use(cors())
 
 app.use(express.json())
 app.use(express.urlencoded({
-  extended: true,
+  extended: false,
 }))
+
+app.use('/user', require('./../src/user/user.routes'))
+app.use('/ticket', require('./../src/ticket/ticket.routes'))
 
 module.exports = app
