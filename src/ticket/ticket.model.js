@@ -5,7 +5,7 @@ const ticketTable = 'chamado'
 const ticketTitleTable = 'titulo'
 const ticketControlTable = 'chamado_controle'
 
-const query = knex
+const query = () => knex
   .select([
     `${ticketControlTable}.cpf`,
     `${ticketControlTable}.chamado_id`,
@@ -63,18 +63,18 @@ const create = async (cpf, data) => {
 }
 
 const findAll = (cpf = undefined) => {
-
-  if (cpf) {
-    query.where(`${ticketControlTable}.cpf`, cpf)
-  }
-
-  return query
+  return (
+    cpf
+      ? query()
+        .where(`${ticketControlTable}.cpf`, cpf)
+      : query()
+  )
     .then(results => mapTicket(results))
 }
 
 const findOne = id => {
   if (typeof id !== 'number') throw new Error('Id precisa ser do tipo Number');
-  return query
+  return query()
     .where('chamado_id', id)
     .then(result => mapTicket(result))
     .then(result => result[0])
